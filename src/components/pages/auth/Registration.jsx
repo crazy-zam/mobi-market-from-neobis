@@ -1,8 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import authBackground from '../../../assets/auth background.png';
+import passIcon from '../../../assets/password icon.svg';
 import './auth.css';
+import InputForm from '../../UI/InputForm';
+import Input from '../../UI/Input';
+import Button from '../../UI/Button';
+import { checkUser } from '../../../actions/user';
 
 function Registration() {
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [configurePass, setConfigurePass] = useState(false);
   return (
     <div>
       <div className="auth">
@@ -15,11 +27,14 @@ function Registration() {
             <h3 className="reg-title">Регистрация</h3>
           </div>
           <div className="auth-form">
-            <input type="text" />
-            <input type="text" />
-            <a href="">Забыли пароль</a>
-            <button>Войти </button>
+            {configurePass && (
+              <div className="password-reminder">
+                <img src={passIcon} />
+              </div>
+            )}
+            <InputForm firstField={`username`} secondField={`password`} />
           </div>
+          <ToastContainer className="toast" />
         </div>
       </div>
     </div>
