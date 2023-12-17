@@ -25,6 +25,7 @@ export const auth = (username, password) => {
       });
       dispatch(setUser(response.data));
     } catch (error) {
+      notify(error.response?.data?.error);
       console.log(error.response?.data?.error);
     }
   };

@@ -39,7 +39,6 @@
 }
 .toast {
   position: absolute !important;
-  top: 0% !important;
 }
 
 .reg-back {
@@ -47,28 +46,4 @@
   left: 0;
   float: left;
   clear: both;
-}
-
-.authorization_header {
-  font-size: 30px;
-  font-weight: 700;
-}
-.authorization input {
-  margin: 10px 20px;
-}
-.authorization_btn {
-  border: none;
-  background-color: #566885;
-  border-radius: 8px;
-  color: white;
-  font-size: 20px;
-  font-weight: 700;
-  padding: 5px 10px;
-  align-self: flex-end;
-  margin-top: 10px;
-}
-.authorization_btn:hover {
-  background-color: white;
-  cursor: pointer;
-  color: #566885;
 }

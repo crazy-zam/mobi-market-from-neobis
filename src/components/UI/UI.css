@@ -1,0 +1,20 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.product-card {
+  padding: 10px;
+  width: 10vw;
+  height: 20vh;
+}
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+
+  justify-content: space-between;
+}
+.field--row {
+  display: table-row;
+}
