@@ -3,4 +3,19 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: #eeeeee;
+  height: 100vh;
+}
+
+.profile {
+  background-color: #eeeeee;
+  height: 100vh;
+  display: flex;
+}
+
+.profile-content {
+  width: max(500px, calc(80vw - 540px));
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
 }

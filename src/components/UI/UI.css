@@ -4,17 +4,91 @@
 }
 
 .product-card {
-  padding: 10px;
-  width: 10vw;
-  height: 20vh;
+  width: 154px;
+  height: 184px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* justify-content: center; */
+  align-items: center;
 }
-.wrapper {
-  display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  grid-template-rows: repeat(4, 1fr);
+.productImg {
+  padding: 6px 0;
+  height: 85px;
+  width: 142px;
+}
+.productTitle,
+.prodcutPrice,
+.productLikes {
+  align-self: flex-start;
+  padding: 0 6px;
+}
 
+.wrapper {
+  width: 80vw;
+  height: 80vh;
+  display: grid;
+  grid-template-columns: repeat(8, minmax(154px, 1fr));
+  grid-template-rows: repeat(4, minmax(184px, 1fr));
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+}
+.pageBtn {
+  height: 32px;
+  width: 32px;
+  background-color: #c0c0c0;
+  color: #494949;
+  font-size: 14px;
+  font-family: Inter;
+  font-weight: 500;
+  border-radius: 8px;
+  border: none;
+  padding: 10px;
+}
+.pageBtnCurrent {
+  background-color: #5458ea;
+  color: #ffffff;
+}
+.pageBtnArrow {
+  border: #5458ea 1px solid;
+  background: transparent;
+}
+
+.likes {
+  display: flex;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
   justify-content: space-between;
 }
-.field--row {
-  display: table-row;
+.header-btn {
+  background-color: rgba(192, 192, 192, 0.2);
+  border: none;
+  border-radius: 50px;
+}
+.back-btn {
+  display: flex;
+  align-items: center;
+}
+.profile-sidebar {
+  background-color: white;
+  width: 540px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.profile-sidebar-btn {
+  display: flex;
+  justify-content: space-between;
+  width: 456px;
+  align-items: center;
+}
+.profile-sidebar-btn-group {
+  display: flex;
+  align-items: center;
 }

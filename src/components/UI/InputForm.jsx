@@ -1,22 +1,8 @@
 import { useFormik } from 'formik';
-import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { auth } from '../../actions/user';
 
-const notify = (mess) =>
-  toast.error(`${mess}`, {
-    position: 'top-center',
-    autoClose: 5000,
-    hideProgressBar: true,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    theme: 'colored',
-    closeButton: false,
-  });
-
-const InputForm = ({ callback, type = 'empty' }) => {
+const InputForm = ({ type = 'empty' }) => {
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {

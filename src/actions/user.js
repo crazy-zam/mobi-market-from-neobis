@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { API_URL } from '../config';
 import { toast } from 'react-toastify';
-import { setUser } from '../reducers/userReducer';
+import { setUser, stopUserEdit } from '../reducers/userReducer';
 
 const notify = (mess) =>
   toast.error(`${mess}`, {
@@ -66,5 +66,24 @@ export const registration = (username, email, password, confirm_password) => {
       })
       .then((response) => console.log(response))
       .catch((err) => console.log(err.response?.data?.error));
+  };
+};
+
+export const updateUser = (
+  first_name,
+  last_name,
+  username,
+  birth_date,
+  email,
+  token,
+) => {
+  console.log('test');
+  return async (dispatch) => {
+    try {
+      console.log('test2');
+      dispatch(stopUserEdit());
+    } catch (error) {
+      console.log(error);
+    }
   };
 };

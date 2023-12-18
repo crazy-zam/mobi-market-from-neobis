@@ -4,6 +4,7 @@ import Registration from './pages/auth/Registration';
 import Login from './pages/auth/Login';
 import Main from './pages/Main';
 import './App.css';
+import Profile from './pages/Profile';
 
 function App() {
   const isAuth = useSelector((state) => state.user.isAuth);
@@ -20,6 +21,7 @@ function App() {
         ) : (
           <Routes>
             <Route path="/main" element={<Main />} />
+            <Route path="/profile" element={<Profile />} />
             <Route path="*" element={<Navigate to="/main" />} />
           </Routes>
         )}

@@ -1,12 +1,25 @@
 import React from 'react';
-import productImg from './../../assets/productImg.png';
-const ProductMini = () => {
+import defaultImg from './../../assets/productImg.png';
+import likeRed from './../../assets/like red.svg';
+import likeGrey from './../../assets/like grey.svg';
+import './UI.css';
+
+const ProductMini = ({
+  img = defaultImg,
+  title = 'Title',
+  price = '100$',
+  likes = '200',
+  liked = false,
+}) => {
   return (
     <div className="product-card">
-      <img src={productImg} />
-      <div className="productTitle">Product card title</div>
-      <div className="prodcutPrice">1000$</div>
-      <div className="productLikes">200 likes</div>
+      <img className="productImg" src={img} />
+      <div className="prodcutPrice">{title}</div>
+      <div className="productTitle">{price}</div>
+      <div className="likes">
+        <img className="like" src={liked ? likeRed : likeGrey} />
+        <div className="productLikes">{likes}</div>
+      </div>
     </div>
   );
 };

@@ -1,20 +1,28 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import ProductMini from './ProductMini';
 import './UI.css';
 const ProductsGrid = () => {
-  const field_row = [...new Array(8).keys()];
-  const field_col = [...new Array(4).keys()];
+  const products = useSelector((state) => state.product.products.results);
+  const dispatch = useDispatch();
+  const lazy = new Array(32)
+    .fill(0)
+    .map((val, ind) => <ProductMini key={ind} />);
+
   return (
-    <div>
-      <div className="wrapper">
-        {field_row.map((row) => (
-          <div className="field--row" key={row}>
-            {field_col.map((col) => (
-              <ProductMini key={`${row} ${col}`}></ProductMini>
-            ))}
-          </div>
-        ))}
-      </div>
+    <div className="wrapper">
+      {products
+        ? products.map((product) => (
+            <ProductMini
+              key={product.id}
+              img={product.images[0].image}
+              title={product.name}
+              price={product.price}
+              likes={product.like_count}
+              liked={product.liked_by_current_user}
+            ></ProductMini>
+          ))
+        : lazy}
     </div>
   );
 };
