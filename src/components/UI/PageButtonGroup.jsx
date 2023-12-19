@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import Button from './Button';
 import { getAllProducts } from '../../actions/product';
-import './UI.css';
+
 import leftArrow from './../../assets/arrow left.svg';
 import rightArrow from './../../assets/arrow right.svg';
 
@@ -12,14 +12,9 @@ const PageButtonGroup = () => {
   const changePageHandler = (page) => {
     dispatch(getAllProducts(user.access, page));
   };
-  const maxPage = 7;
+
   const currPage = 1;
   const pages = new Array();
-  //   const btn = {
-  //     title: 'page number or arrow',
-  //     type: 'page, curr page, arrow',
-  //     callback: dispatch(getAllProducts(user.access, 'page')),
-  //   };
 
   if (!!products.previous)
     pages.push(

@@ -11,6 +11,8 @@
   background-color: #eeeeee;
   height: 100vh;
   display: flex;
+  position: absolute;
+  left: 0;
 }
 
 .profile-content {

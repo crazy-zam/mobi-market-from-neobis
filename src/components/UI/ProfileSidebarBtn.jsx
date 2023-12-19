@@ -3,7 +3,8 @@ import arrow from './../../assets/profile arrow.svg';
 import imgLiked from './../../assets/profile liked.svg';
 import imgExit from './../../assets/profile exit.svg';
 import imgMyProducts from './../../assets/profile my products.svg';
-import './UI.css';
+import { openLikedAction } from '../../actions/app';
+import { useDispatch } from 'react-redux';
 
 const ProfileSidebarBtn = ({ type, text }) => {
   const types = {
@@ -11,8 +12,16 @@ const ProfileSidebarBtn = ({ type, text }) => {
     products: imgMyProducts,
     exit: imgExit,
   };
+  const dispatch = useDispatch;
+  const helper = () => {
+    dispatch(openLikedAction());
+  };
   return (
     <div
+      onClick={() => {
+        console.log('first');
+        helper();
+      }}
       className="profile-sidebar-btn
     "
     >

@@ -1,0 +1,25 @@
+.product {
+  width: 154px;
+  height: 184px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* justify-content: center; */
+  align-items: center;
+}
+.productImg {
+  padding: 6px 0;
+  height: 85px;
+  width: 142px;
+}
+.productTitle,
+.prodcutPrice,
+.productLikes {
+  align-self: flex-start;
+  padding: 0 6px;
+}
+.likes {
+  display: flex;
+}

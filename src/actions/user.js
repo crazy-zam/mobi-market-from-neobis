@@ -3,7 +3,7 @@ import { API_URL } from '../config';
 import { toast } from 'react-toastify';
 import { setUser, stopUserEdit } from '../reducers/userReducer';
 
-const notify = (mess) =>
+const errorNotify = (mess) =>
   toast.error(`${mess}`, {
     position: 'top-center',
     autoClose: 5000,
@@ -16,6 +16,18 @@ const notify = (mess) =>
     closeButton: false,
   });
 
+const successNotify = (mess) =>
+  toast.success(`${mess}`, {
+    position: 'top-center',
+    autoClose: 5000,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: 'colored',
+  });
+
 export const auth = (username, password) => {
   return async (dispatch) => {
     try {
@@ -25,7 +37,7 @@ export const auth = (username, password) => {
       });
       dispatch(setUser(response.data));
     } catch (error) {
-      notify(error.response?.data?.error);
+      errorNotify(error.response?.data?.error);
       console.log(error.response?.data?.error);
     }
   };
@@ -46,7 +58,7 @@ export const checkUser = (username, email, setConfigurePass) => {
               ? 'с таким именем и почтой'
               : ` ${username ? 'с таким именем' : 'с такой почтой'}`
           }`;
-          notify(`Пользователь ${message} уже зарегистрирован`);
+          errorNotify(`Пользователь ${message} уже зарегистрирован`);
         } else {
           setConfigurePass(true);
         }
@@ -77,11 +89,24 @@ export const updateUser = (
   email,
   token,
 ) => {
-  console.log('test');
   return async (dispatch) => {
     try {
-      console.log('test2');
+      console.log(first_name, last_name, username, birth_date, email, token);
+      await axios.put(
+        `${API_URL}/users/profile/update/`,
+        {
+          first_name: first_name,
+          last_name: last_name,
+          username: username,
+          birth_date: birth_date,
+          email: email,
+        },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        },
+      );
       dispatch(stopUserEdit());
+      successNotify('Пользователь обновлен');
     } catch (error) {
       console.log(error);
     }

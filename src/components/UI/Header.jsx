@@ -4,14 +4,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import Button from './Button';
 import logo from '../../assets/logo.svg';
 import profileLogodefault from './../../assets/profile default.svg';
-import './UI.css';
+import styles from './header.module.css';
 
 const Header = () => {
   const user = useSelector((state) => state.user.currentUser);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   return (
-    <div className="header">
+    <div className={styles.header}>
       <img src={logo} />
       <Button fill="Подать объявление"></Button>
       <div className="user" onClick={() => navigate('/profile')}>

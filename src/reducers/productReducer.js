@@ -18,7 +18,7 @@ export default function productReducer(state = defaultState, action) {
         products: {
           ...state.products,
           ...state.products.results.map((product) =>
-            product.id == action.payload
+            product.id === action.payload
               ? { ...product, liked_by_current_user: true }
               : { ...product },
           ),

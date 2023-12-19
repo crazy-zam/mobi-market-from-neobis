@@ -1,5 +1,4 @@
 import React from 'react';
-import './UI.css';
 
 function Button({
   callback = () => {

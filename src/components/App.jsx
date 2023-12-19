@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import Registration from './pages/auth/Registration';
 import Login from './pages/auth/Login';
 import Main from './pages/Main';
+import Test from './pages/Test';
 import './App.css';
 import Profile from './pages/Profile';
 
@@ -14,6 +15,7 @@ function App() {
       <div className="app">
         {!isAuth ? (
           <Routes>
+            <Route path="/test" element={<Test />} />
             <Route path="/login" element={<Login />} />
             <Route path="/registration" element={<Registration />} />
             <Route path="*" element={<Navigate to="/login" />} />

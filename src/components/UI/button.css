@@ -1,0 +1,20 @@
+.pageBtn {
+  height: 32px;
+  width: 32px;
+  background-color: #c0c0c0;
+  color: #494949;
+  font-size: 14px;
+  font-family: Inter;
+  font-weight: 500;
+  border-radius: 8px;
+  border: none;
+  padding: 10px;
+}
+.pageBtnCurrent {
+  background-color: #5458ea;
+  color: #ffffff;
+}
+.pageBtnArrow {
+  border: #5458ea 1px solid;
+  background: transparent;
+}

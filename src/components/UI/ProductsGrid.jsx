@@ -1,7 +1,8 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ProductMini from './ProductMini';
-import './UI.css';
+import styles from './productsGrid.module.css';
+
 const ProductsGrid = () => {
   const products = useSelector((state) => state.product.products.results);
   const dispatch = useDispatch();
@@ -10,7 +11,7 @@ const ProductsGrid = () => {
     .map((val, ind) => <ProductMini key={ind} />);
 
   return (
-    <div className="wrapper">
+    <div className={styles.wrapper}>
       {products
         ? products.map((product) => (
             <ProductMini
