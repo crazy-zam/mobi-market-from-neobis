@@ -17,7 +17,7 @@ const Main = () => {
   return (
     <div className="main">
       <Header></Header>
-      <ProductsGrid></ProductsGrid>
+      <ProductsGrid type="main"></ProductsGrid>
       <PageButtonGroup></PageButtonGroup>
     </div>
   );

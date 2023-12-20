@@ -2,9 +2,9 @@ import React from 'react';
 import redDelete from './../../assets/red delete.svg';
 import redExit from './../../assets/red exit.svg';
 import redHeart from './../../assets/red heart.svg';
-import styles from './smallPopupWIndow.module.css';
+import styles from './smallPopupWindow.module.css';
 
-const PopupWIndow = ({ type, content = 'delete', title = false }) => {
+const SmallPopupWIndow = ({ type, content = 'delete', title = false }) => {
   console.log(type, content, title);
   const types = {
     delete: ['Удалить', redDelete],
@@ -31,4 +31,4 @@ const PopupWIndow = ({ type, content = 'delete', title = false }) => {
   );
 };
 
-export default PopupWIndow;
+export default SmallPopupWIndow;

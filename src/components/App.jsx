@@ -22,9 +22,10 @@ function App() {
           </Routes>
         ) : (
           <Routes>
+            <Route path="/test" element={<Test />} />
             <Route path="/main" element={<Main />} />
             <Route path="/profile" element={<Profile />} />
-            <Route path="*" element={<Navigate to="/main" />} />
+            <Route path="*" element={<Navigate to="/test" />} />
           </Routes>
         )}
       </div>

@@ -35,7 +35,7 @@ export const openLiked = () => ({
 
 export const openMyProducts = () => ({
   type: OPEN_MY_PRODUCTS,
-  payload: 'my products',
+  payload: 'myProducts',
 });
 export const openProfile = () => ({
   type: OPEN_LIKED,

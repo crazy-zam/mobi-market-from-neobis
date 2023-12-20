@@ -6,7 +6,7 @@ import styles from './profileSidebar.module.css';
 
 const ProfileSidebar = (callback) => {
   const user = useSelector((state) => state.user.currentUser);
-  const dispatch = useDispatch();
+
   return (
     <div className={styles.sidebar}>
       <div className="profile-sidebar-head">

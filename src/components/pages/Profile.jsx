@@ -5,18 +5,18 @@ import FormAcceptPhone from '../UI/FormAcceptPhone';
 import ProductGrid from './../UI/ProductsGrid';
 import ProfileDescription from '../UI/ProfileDescription';
 import { useSelector } from 'react-redux';
+import styles from './profile.module.css';
 
 const Profile = () => {
-  const [page, setPage] = useState('main');
   const app = useSelector((state) => state.app);
   return (
-    <div className="profile">
+    <div className={styles.profile}>
       <ProfileSidebar></ProfileSidebar>
       <div className="profile-content">
         {app.currentPage == 'profile' ? (
           <ProfileDescription></ProfileDescription>
         ) : (
-          <ProductGrid></ProductGrid>
+          <ProductGrid type={app.currentPage}></ProductGrid>
         )}
 
         <FormAcceptPhone></FormAcceptPhone>
