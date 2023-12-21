@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import profileLogodefault from './../../assets/profile default.svg';
 import ProfileSidebarBtn from './ProfileSidebarBtn';
@@ -16,6 +17,7 @@ const ProfileSidebar = (callback) => {
           <div>{user.first_name}</div>
         </div>
       </div>
+      <Link to="/test">Test</Link>
       <ProfileSidebarBtn type="liked" text={'Понравившиеся'} />
       <ProfileSidebarBtn type="products" text={'Мои товары'} />
       <ProfileSidebarBtn type="exit" text={'Выйти'} />

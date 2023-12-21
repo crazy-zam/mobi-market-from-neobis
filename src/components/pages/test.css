@@ -6,5 +6,7 @@
   left: 0;
 }
 
-.wrapper {
+.userData {
+  display: flex;
+  flex-direction: column;
 }

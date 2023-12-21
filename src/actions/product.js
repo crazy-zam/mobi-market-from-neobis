@@ -22,6 +22,56 @@ export function getAllProducts(token, page = 1) {
   };
 }
 
+export function addProduct(
+  title,
+  price,
+  shortDescription,
+  fullDescription,
+  uploadedImages,
+  token,
+) {
+  return async () => {
+    try {
+      const formData = new FormData();
+
+      formData.append('name', title);
+      formData.append('price', price);
+      formData.append('short_description', shortDescription);
+      formData.append('full_description', fullDescription);
+      uploadedImages.forEach((file) => {
+        console.log(file);
+        formData.append('uploaded_images', file, file.name);
+      });
+      const product = await axios.post(`${API_URL}/products/`, formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return product;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function productLike(token, product) {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post(
+        `${API_URL}/products/like/${product}/`,
+        {},
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        },
+      );
+      console.log(response);
+      dispatch(likeProduct(product));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
 export function getLikedProducts(token, page = 1) {
   return async (dispatch) => {
     try {
@@ -52,24 +102,6 @@ export function getMyProducts(token, page = 1) {
   };
 }
 
-export function productLike(token, product) {
-  return async (dispatch) => {
-    try {
-      const response = await axios.post(
-        `${API_URL}/products/like/${product}/`,
-        {},
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        },
-      );
-      console.log(response);
-      dispatch(likeProduct(product));
-    } catch (error) {
-      console.log(error);
-    }
-  };
-}
-
 export function productUnlike(token, product) {
   return async (dispatch) => {
     try {
@@ -88,63 +120,58 @@ export function productUnlike(token, product) {
   };
 }
 
-export function addProduct(
+export function getProduct(id, token) {
+  return async () => {
+    try {
+      const product = await axios.get(`${API_URL}/products/${id}/`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      return product;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function updateProduct(
+  id,
   title,
   price,
   shortDescription,
   fullDescription,
   uploadedImages,
+  deletedImages,
   token,
 ) {
   return async () => {
     try {
-      const product = await axios.post(
-        `${API_URL}/products/`,
-        {
-          name: title,
-          price: price,
-          short_description: shortDescription,
-          full_description: fullDescription,
-          uploaded_images: uploadedImages,
-        },
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        },
-      );
+      const formData = new FormData();
+      formData.append('name', title);
+      formData.append('price', price);
+      formData.append('short_description', shortDescription);
+      formData.append('full_description', fullDescription);
+      uploadedImages.forEach((file) => {
+        formData.append('uploaded_images', file, file.name);
+      });
+      deletedImages.forEach((id) => {
+        formData.append('deleted_images', id);
+      });
+      const product = await axios.put(`${API_URL}/products/${id}/`, formData, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       console.log(product);
     } catch (error) {
       console.log(error);
     }
   };
 }
-export function getProduct(id, token) {
-  return async () => {
-    const product = await axios.get(
-      `${API_URL}/products/${id}/`,
 
-      {
+export function deleteProduct(id, token) {
+  return async () => {
+    try {
+      await axios.delete(`${API_URL}/products/${id}/`, {
         headers: { Authorization: `Bearer ${token}` },
-      },
-    );
-    try {
-    } catch (error) {
-      console.log(error);
-    }
-  };
-}
-
-export function updateProduct() {
-  return async () => {
-    try {
-    } catch (error) {
-      console.log(error);
-    }
-  };
-}
-
-export function deleteProduct() {
-  return async () => {
-    try {
+      });
     } catch (error) {
       console.log(error);
     }
