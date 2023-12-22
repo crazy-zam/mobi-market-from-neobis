@@ -1,4 +1,7 @@
 import React from 'react';
+import styles from './button.module.css';
+import leftArrow from './../../assets/arrow left.svg';
+import rightArrow from './../../assets/arrow right.svg';
 
 function Button({
   callback = () => {
@@ -8,7 +11,11 @@ function Button({
   fill,
 }) {
   let text;
-  text = type.includes('pageBtnArrow') ? <img src={fill} /> : fill;
+  text = type.includes('pageBtnArrow') ? (
+    <img src={fill === 'previous' ? leftArrow : rightArrow} />
+  ) : (
+    fill
+  );
   return (
     <button className={type} onClick={callback}>
       {text}

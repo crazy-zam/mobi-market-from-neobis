@@ -14,9 +14,23 @@ import {
   verifyPhone,
 } from './../../actions/user';
 
+import {
+  getAllProducts,
+  addProduct,
+  getProduct,
+  updateProduct,
+  deleteProduct,
+  productLike,
+  productUnlike,
+  getLikedProducts,
+  getMyProducts,
+} from './../../actions/product';
+
 const Test = () => {
   const [files, setFiles] = useState([]);
   const user = useSelector((state) => state.user);
+  const myProducts = useSelector((state) => state.product.myProducts);
+  const likedProducts = useSelector((state) => state.product.liked);
   const dispatch = useDispatch();
   const helper = () => {
     console.log(
@@ -33,6 +47,18 @@ const Test = () => {
       ),
     );
   };
+  const getLiked = () => {
+    dispatch(getLikedProducts(user.currentUser.access, 1));
+    setTimeout(() => {
+      console.log(likedProducts);
+    }, 1000);
+  };
+  const getMyprod = () => {
+    dispatch(getMyProducts(user.currentUser.access, 1));
+    setTimeout(() => {
+      console.log(myProducts);
+    }, 1000);
+  };
   return (
     <div className={styles.profile}>
       <div className={styles.profileContent}>
@@ -44,8 +70,9 @@ const Test = () => {
           <div>birth_date {user.currentUser.birth_date}</div>
           <div>phone {user.currentUser.phone}</div>
           <div>email {user.currentUser.email}</div>
-
-          <button onClick={helper}>Test button </button>
+          <button onClick={getMyprod}>getMyProd</button>
+          <button onClick={getLiked}>getLiked</button>
+          {/* <button onClick={helper}>Test button </button>
           <input
             onChange={(event) => {
               setFiles([...event.target.files]);
@@ -54,7 +81,7 @@ const Test = () => {
             type="file"
             id="upload-input"
             className={styles.uploadInput}
-          />
+          /> */}
         </div>
       </div>
     </div>

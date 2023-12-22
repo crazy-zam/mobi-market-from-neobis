@@ -4,6 +4,7 @@ import {
   setLikedProducts,
   likeProduct,
   unlikeProduct,
+  setMyProducts,
 } from '../reducers/productReducer';
 import { API_URL } from '../config';
 
@@ -81,6 +82,7 @@ export function getLikedProducts(token, page = 1) {
       });
 
       dispatch(setLikedProducts(products.data));
+      return products.data;
     } catch (error) {
       console.log(error);
     }
@@ -95,7 +97,8 @@ export function getMyProducts(token, page = 1) {
         params: { page: page, limit: 16 },
       });
 
-      dispatch(setLikedProducts(products.data));
+      dispatch(setMyProducts(products.data));
+      return products.data;
     } catch (error) {
       console.log(error);
     }
@@ -114,6 +117,7 @@ export function productUnlike(token, product) {
       );
       console.log(response);
       dispatch(unlikeProduct(product));
+      return response;
     } catch (error) {
       console.log(error);
     }
@@ -160,6 +164,7 @@ export function updateProduct(
         headers: { Authorization: `Bearer ${token}` },
       });
       console.log(product);
+      return product;
     } catch (error) {
       console.log(error);
     }
@@ -169,9 +174,10 @@ export function updateProduct(
 export function deleteProduct(id, token) {
   return async () => {
     try {
-      await axios.delete(`${API_URL}/products/${id}/`, {
+      const response = await axios.delete(`${API_URL}/products/${id}/`, {
         headers: { Authorization: `Bearer ${token}` },
       });
+      return response;
     } catch (error) {
       console.log(error);
     }

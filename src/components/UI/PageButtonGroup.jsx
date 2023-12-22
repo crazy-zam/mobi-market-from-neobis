@@ -1,24 +1,49 @@
 import { useDispatch, useSelector } from 'react-redux';
 import Button from './Button';
-import { getAllProducts } from '../../actions/product';
+import {
+  getAllProducts,
+  getLikedProducts,
+  getMyProducts,
+} from '../../actions/product';
 
-import leftArrow from './../../assets/arrow left.svg';
-import rightArrow from './../../assets/arrow right.svg';
-
-const PageButtonGroup = () => {
+const PageButtonGroup = ({ type }) => {
   const user = useSelector((state) => state.user.currentUser);
-  const products = useSelector((state) => state.product.products);
   const dispatch = useDispatch();
-  const changePageHandler = (page) => {
-    dispatch(getAllProducts(user.access, page));
+  const types = {
+    main: {
+      callback: (page) => {
+        dispatch(getAllProducts(user.access, page));
+      },
+      product: useSelector((state) => state.product.products),
+    },
+    liked: {
+      callback: (page) => {
+        dispatch(getLikedProducts(user.access, page));
+      },
+      product: useSelector((state) => state.product.liked),
+    },
+    myProducts: {
+      callback: (page) => {
+        dispatch(getMyProducts(user.access, page));
+      },
+      product: useSelector((state) => state.product.myProducts),
+    },
   };
 
-  const currPage = 1;
+  const products = types[type].product;
+  // const products = useSelector((state) => state.product.products);
+  console.log(products);
+  const changePageHandler = types[type].callback;
+  // const changePageHandler = (page) => {
+  //   dispatch(getAllProducts(user.access, page));
+  // };
+
+  const currPage = products.page;
   const pages = new Array();
 
   if (!!products.previous)
     pages.push(
-      { type: 'pageBtn pageBtnArrow', title: leftArrow },
+      { type: 'pageBtn pageBtnArrow', title: 'previous' },
       { type: 'pageBtn', title: currPage - 1 },
     );
   pages.push({ type: 'pageBtnCurrent pageBtn', title: currPage });
@@ -27,7 +52,7 @@ const PageButtonGroup = () => {
       { type: 'pageBtn', title: currPage + 1 },
       {
         type: 'pageBtn pageBtnArrow',
-        title: rightArrow,
+        title: 'next',
       },
     );
 
@@ -41,7 +66,10 @@ const PageButtonGroup = () => {
           callback={
             typeof title == 'number' && title != currPage
               ? () => changePageHandler(title)
-              : () => console.log(title)
+              : () =>
+                  changePageHandler(
+                    title === 'previous' ? currPage - 1 : currPage + 1,
+                  )
           }
         />
       ))}

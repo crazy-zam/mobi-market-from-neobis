@@ -18,7 +18,7 @@ const Main = () => {
     <div className="main">
       <Header></Header>
       <ProductsGrid type="main"></ProductsGrid>
-      <PageButtonGroup></PageButtonGroup>
+      <PageButtonGroup type="main"></PageButtonGroup>
     </div>
   );
 };

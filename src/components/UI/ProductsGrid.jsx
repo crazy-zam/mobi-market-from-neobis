@@ -1,22 +1,41 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ProductMini from './ProductMini';
+import classNames from 'classnames';
 import styles from './productsGrid.module.css';
 
 const ProductsGrid = ({ type = 'main' }) => {
   console.log('grid ', type);
   const types = {
-    main: (state) => state.product.products.results,
-    liked: (state) => state.product.liked.results,
-    myProducts: (state) => state.product.myProducts.results,
+    main: {
+      state: (state) => state.product.products.results,
+      grid: 32,
+      style: styles.gridMain,
+    },
+    liked: {
+      state: (state) => state.product.liked.results,
+      grid: 16,
+      style: styles.gridSmall,
+    },
+    myProducts: {
+      state: (state) => state.product.myProducts.results,
+      grid: 16,
+      style: styles.gridSmall,
+    },
   };
-  const lazy = new Array(32)
+  const lazy = new Array(types[type].grid)
     .fill(0)
     .map((val, ind) => <ProductMini key={ind} />);
-  const products = useSelector(types[type]);
+  const products = useSelector(types[type].state);
+  let style = '';
+  if (type === 'main') {
+    style = styles.gridMain;
+  } else {
+    style = styles.gridSmall;
+  }
 
   return (
-    <div className={styles.wrapper}>
+    <div className={styles[`${type == 'main' ? 'wrapper' : 'gridSmall'}`]}>
       {products
         ? products.map((product) => (
             <ProductMini
