@@ -8,6 +8,7 @@ import './pages.css';
 
 const Main = () => {
   const user = useSelector((state) => state.user.currentUser);
+  console.log(user);
   const dispatch = useDispatch();
   const token = user.access;
   console.log('main render');

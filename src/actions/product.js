@@ -9,6 +9,7 @@ import {
 import { API_URL } from '../config';
 
 export function getAllProducts(token, page = 1) {
+  console.log(token);
   return async (dispatch) => {
     try {
       const products = await axios.get(`${API_URL}/products/`, {

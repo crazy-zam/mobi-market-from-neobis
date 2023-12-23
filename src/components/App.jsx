@@ -1,5 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { auth } from '../actions/user';
 import Registration from './pages/auth/Registration';
 import Login from './pages/auth/Login';
 import Main from './pages/Main';
@@ -9,7 +11,10 @@ import Profile from './pages/Profile';
 
 function App() {
   const isAuth = useSelector((state) => state.user.isAuth);
-
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(auth());
+  }, []);
   return (
     <BrowserRouter>
       <div className="app">

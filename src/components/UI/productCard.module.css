@@ -1,0 +1,46 @@
+.background {
+  color: rgba(19, 19, 19, 0.4);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 2;
+}
+
+.card {
+  width: 564px;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  z-index: 3;
+  background-color: white;
+}
+.image {
+  width: 500px;
+}
+.closeBtn {
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+}
+.price {
+  color: blue;
+}
+.phone {
+  color: black;
+}
+.liked {
+  width: 50px;
+}
+.likes {
+  color: gray;
+}
+.title {
+  color: black;
+}
+.shortDescription {
+  color: gray;
+}
+.fullDescription {
+  color: gray;
+}

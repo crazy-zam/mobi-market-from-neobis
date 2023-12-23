@@ -10,17 +10,14 @@ const ProductsGrid = ({ type = 'main' }) => {
     main: {
       state: (state) => state.product.products.results,
       grid: 32,
-      style: styles.gridMain,
     },
     liked: {
       state: (state) => state.product.liked.results,
       grid: 16,
-      style: styles.gridSmall,
     },
     myProducts: {
       state: (state) => state.product.myProducts.results,
       grid: 16,
-      style: styles.gridSmall,
     },
   };
   const lazy = new Array(types[type].grid)

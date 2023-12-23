@@ -31,16 +31,11 @@ const PageButtonGroup = ({ type }) => {
   };
 
   const products = types[type].product;
-  // const products = useSelector((state) => state.product.products);
-  console.log(products);
   const changePageHandler = types[type].callback;
-  // const changePageHandler = (page) => {
-  //   dispatch(getAllProducts(user.access, page));
-  // };
 
   const currPage = products.page;
   const pages = new Array();
-
+  console.log(type, currPage);
   if (!!products.previous)
     pages.push(
       { type: 'pageBtn pageBtnArrow', title: 'previous' },
@@ -58,9 +53,9 @@ const PageButtonGroup = ({ type }) => {
 
   return (
     <div>
-      {pages.map(({ type, title }) => (
+      {pages.map(({ type, title }, ind) => (
         <Button
-          key={title}
+          key={`${title},${ind}`}
           type={type}
           fill={title}
           callback={

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './test.css';
-
+import ProductCard from '../UI/ProductCard';
 import {
   addPhone,
   changePassword,
@@ -29,6 +29,7 @@ import {
 const Test = () => {
   const [files, setFiles] = useState([]);
   const user = useSelector((state) => state.user);
+  const product = useSelector((state) => state.product.products.results[0]);
   const myProducts = useSelector((state) => state.product.myProducts);
   const likedProducts = useSelector((state) => state.product.liked);
   const dispatch = useDispatch();
@@ -61,29 +62,17 @@ const Test = () => {
   };
   return (
     <div className={styles.profile}>
-      <div className={styles.profileContent}>
-        Test page
-        <div className="userData">
-          <div>first_name {user.currentUser.first_name}</div>
-          <div>last_name {user.currentUser.last_name}</div>
-          <div>username {user.currentUser.username}</div>
-          <div>birth_date {user.currentUser.birth_date}</div>
-          <div>phone {user.currentUser.phone}</div>
-          <div>email {user.currentUser.email}</div>
-          <button onClick={getMyprod}>getMyProd</button>
-          <button onClick={getLiked}>getLiked</button>
-          {/* <button onClick={helper}>Test button </button>
-          <input
-            onChange={(event) => {
-              setFiles([...event.target.files]);
-              console.log(files[0].name);
-            }}
-            type="file"
-            id="upload-input"
-            className={styles.uploadInput}
-          /> */}
-        </div>
-      </div>
+      <div className={styles.profileContent}>Test page</div>
+      <ProductCard
+        id={product.id}
+        img={product.images}
+        liked={product.liked_by_current_user}
+        likes={product.like_count}
+        price={product.price}
+        title={product.name}
+        shortDescription={product.short_description}
+        fullDescription={product.full_description}
+      ></ProductCard>
     </div>
   );
 };

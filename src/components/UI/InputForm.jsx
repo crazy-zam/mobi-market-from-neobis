@@ -1,6 +1,6 @@
 import { useFormik } from 'formik';
 import { useDispatch } from 'react-redux';
-import { auth } from '../../actions/user';
+import { login } from '../../actions/user';
 
 const InputForm = ({ type = 'empty' }) => {
   const dispatch = useDispatch();
@@ -10,7 +10,7 @@ const InputForm = ({ type = 'empty' }) => {
       secondField: '',
     },
     onSubmit: (values) => {
-      dispatch(auth(values.firstField, values.secondField));
+      dispatch(login(values.firstField, values.secondField));
     },
   });
   const helpNotation = {

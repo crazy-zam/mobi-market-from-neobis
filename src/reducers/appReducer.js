@@ -3,7 +3,7 @@ const OPEN_MY_PRODUCTS = 'OPEN_MY_PRODUCTS';
 const OPEN_PROFILE = 'OPEN_PROFILE';
 
 const defaultState = {
-  currentPage: 'profile',
+  currentPage: 'main',
 };
 
 export default function productReducer(state = defaultState, action) {

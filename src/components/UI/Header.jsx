@@ -9,13 +9,15 @@ import styles from './header.module.css';
 const Header = () => {
   const user = useSelector((state) => state.user.currentUser);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   return (
     <div className={styles.header}>
       <img src={logo} />
       <Button fill="Подать объявление"></Button>
       <div className="user" onClick={() => navigate('/profile')}>
-        <img src={user.photo ? user.photo : profileLogodefault} />
+        <img
+          className={styles.profileLogo}
+          src={user.photo ? user.photo : profileLogodefault}
+        />
         <div>
           <div>{user.username}</div>
           <div>{user.first_name}</div>

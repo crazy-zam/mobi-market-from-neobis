@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { API_URL } from '../config';
 import { toast } from 'react-toastify';
-import { setUser, stopUserEdit } from '../reducers/userReducer';
+import { setUser, stopUserEdit, setTokens } from '../reducers/userReducer';
 
 const errorNotify = (mess) =>
   toast.error(`${mess}`, {
@@ -101,17 +101,32 @@ export const forgotPassword = (phone) => {
   };
 };
 
-export const auth = (username, password) => {
+export const auth = () => {
   return async (dispatch) => {
     try {
-      const response = await axios.post(`${API_URL}/users/login/`, {
-        username: username,
-        password: password,
+      const access = await axios.post(`${API_URL}/users/login/refresh/`, {
+        refresh: localStorage.getItem('refresh'),
       });
+      const response = await axios.get(
+        `${API_URL}/users/me/`,
+
+        {
+          headers: { Authorization: `Bearer ${access.data.access}` },
+        },
+      );
+
       dispatch(setUser(response.data));
-    } catch (error) {
-      errorNotify(error.response?.data?.error);
-      console.log(error.response?.data?.error);
+      dispatch(
+        setTokens(
+          localStorage.getItem('access'),
+          localStorage.getItem('refresh'),
+        ),
+      );
+      localStorage.setItem('access', access.data.access);
+    } catch (e) {
+      console.log(e);
+      localStorage.removeItem('access');
+      localStorage.removeItem('refresh');
     }
   };
 };
@@ -119,15 +134,28 @@ export const auth = (username, password) => {
 export const refreshTokens = (refresh, token) => {
   return async (dispatch) => {
     try {
-      const access = await axios.post(
-        `${API_URL}/users/login/refresh/`,
-        { refresh: refresh },
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        },
-      );
+      const access = await axios.post(`${API_URL}/users/login/refresh/`, {
+        refresh: refresh,
+      });
       return access;
     } catch (error) {
+      console.log(error.response?.data?.error);
+    }
+  };
+};
+
+export const login = (username, password) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post(`${API_URL}/users/login/`, {
+        username: username,
+        password: password,
+      });
+      dispatch(setUser(response.data));
+      localStorage.setItem('access', response.data.access);
+      localStorage.setItem('refresh', response.data.refresh);
+    } catch (error) {
+      errorNotify(error.response?.data?.error);
       console.log(error.response?.data?.error);
     }
   };
