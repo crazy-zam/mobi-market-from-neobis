@@ -29,7 +29,7 @@ import {
 const Test = () => {
   const [files, setFiles] = useState([]);
   const user = useSelector((state) => state.user);
-  const product = useSelector((state) => state.product.products.results[0]);
+  const product = useSelector((state) => state.product.products.results[9]);
   const myProducts = useSelector((state) => state.product.myProducts);
   const likedProducts = useSelector((state) => state.product.liked);
   const dispatch = useDispatch();

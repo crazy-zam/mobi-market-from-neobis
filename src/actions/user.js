@@ -102,27 +102,33 @@ export const forgotPassword = (phone) => {
 };
 
 export const auth = () => {
+  function isTokenExpired(token) {
+    const expiry = JSON.parse(atob(token.split('.')[1])).exp;
+    return Math.floor(new Date().getTime() / 1000) >= expiry;
+  }
   return async (dispatch) => {
     try {
-      const access = await axios.post(`${API_URL}/users/login/refresh/`, {
-        refresh: localStorage.getItem('refresh'),
-      });
-      const response = await axios.get(
-        `${API_URL}/users/me/`,
+      if (!isTokenExpired(localStorage.getItem('refresh'))) {
+        const access = await axios.post(`${API_URL}/users/login/refresh/`, {
+          refresh: localStorage.getItem('refresh'),
+        });
+        const response = await axios.get(
+          `${API_URL}/users/me/`,
 
-        {
-          headers: { Authorization: `Bearer ${access.data.access}` },
-        },
-      );
+          {
+            headers: { Authorization: `Bearer ${access.data.access}` },
+          },
+        );
 
-      dispatch(setUser(response.data));
-      dispatch(
-        setTokens(
-          localStorage.getItem('access'),
-          localStorage.getItem('refresh'),
-        ),
-      );
-      localStorage.setItem('access', access.data.access);
+        dispatch(setUser(response.data));
+        dispatch(
+          setTokens(
+            localStorage.getItem('access'),
+            localStorage.getItem('refresh'),
+          ),
+        );
+        localStorage.setItem('access', access.data.access);
+      }
     } catch (e) {
       console.log(e);
       localStorage.removeItem('access');

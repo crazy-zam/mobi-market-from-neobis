@@ -5,7 +5,6 @@ import classNames from 'classnames';
 import styles from './productsGrid.module.css';
 
 const ProductsGrid = ({ type = 'main' }) => {
-  console.log('grid ', type);
   const types = {
     main: {
       state: (state) => state.product.products.results,

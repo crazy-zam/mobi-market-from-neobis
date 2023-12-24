@@ -35,7 +35,6 @@ const PageButtonGroup = ({ type }) => {
 
   const currPage = products.page;
   const pages = new Array();
-  console.log(type, currPage);
   if (!!products.previous)
     pages.push(
       { type: 'pageBtn pageBtnArrow', title: 'previous' },

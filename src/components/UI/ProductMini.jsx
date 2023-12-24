@@ -4,9 +4,9 @@ import likeRed from './../../assets/like red.svg';
 import likeGrey from './../../assets/like grey.svg';
 import styles from './productMini.module.css';
 import { useDispatch } from 'react-redux';
-import { productLike, productUnlike } from '../../actions/product';
+import { productLike, productUnlike, getProduct } from '../../actions/product';
 import { useSelector } from 'react-redux';
-
+import { showPopupProd, hidePopupProd } from '../../reducers/appReducer';
 const ProductMini = ({
   id,
   img = defaultImg,
@@ -18,7 +18,14 @@ const ProductMini = ({
   const dispatch = useDispatch();
   const token = useSelector((state) => state.user.currentUser.access);
   return (
-    <div className={styles.product}>
+    <div
+      className={styles.product}
+      onClick={() => {
+        dispatch(getProduct(id, token)).then((result) =>
+          dispatch(showPopupProd(result.data)),
+        );
+      }}
+    >
       <img className={styles.productImg} src={img} />
       <div className={styles.prodcutPrice}>{title}</div>
       <div className={styles.productTitle}>{price}</div>
