@@ -22,7 +22,7 @@ export default function userReducer(state = defaultState, action) {
       return {
         ...state,
         currentUser: {
-          ...state.action.payload,
+          ...state.currentUser,
           access: action.payload.access,
           refresh: action.payload.refresh,
         },

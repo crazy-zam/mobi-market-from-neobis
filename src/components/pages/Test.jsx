@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './test.css';
 import ProductCard from '../UI/ProductCard';
+import ProductAddForm from '../UI/ProductAddForm';
 import {
   addPhone,
   changePassword,
@@ -63,16 +64,7 @@ const Test = () => {
   return (
     <div className={styles.profile}>
       <div className={styles.profileContent}>Test page</div>
-      <ProductCard
-        id={product.id}
-        img={product.images}
-        liked={product.liked_by_current_user}
-        likes={product.like_count}
-        price={product.price}
-        title={product.name}
-        shortDescription={product.short_description}
-        fullDescription={product.full_description}
-      ></ProductCard>
+      <ProductAddForm></ProductAddForm>
     </div>
   );
 };

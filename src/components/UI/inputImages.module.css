@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap');
+.uploadImageWrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+.addBtn {
+  width: 76px;
+  height: 96px;
+  background-color: rgba(247, 246, 249, 1);
+  border-radius: 12px;
+  border: none;
+  margin: 6px;
+  transition: 0.4s;
+}
+.addBtn:hover {
+  background-color: rgb(211, 211, 211);
+  transition: 0.4s;
+}
+
+.addBtnDescription {
+  color: rgba(84, 88, 234, 1);
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.imageItem {
+  width: 76px;
+  height: 96px;
+  background-color: rgba(247, 246, 249, 1);
+  border-radius: 12px;
+  border: none;
+  margin: 6px;
+}
+
+.imageDelete {
+  width: 24px;
+  height: 24px;
+  background-color: rgba(247, 246, 249, 0);
+  border: none;
+  position: absolute;
+  bottom: 14px;
+  right: 14px;
+  transition: 0.4s;
+}
+.imageDelete:hover {
+  transform: scale(130%);
+}
+
+.imageWrapper {
+  display: flex;
+  position: relative;
+}
+.mask {
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 12px;
+  opacity: 0;
+  width: 76px;
+  height: 96px;
+  position: absolute;
+  transition: opacity 0.4s linear;
+  color: white;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 6px;
+}
+
+.mask:hover {
+  opacity: 1;
+}
