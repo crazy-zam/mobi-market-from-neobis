@@ -1,13 +1,13 @@
-.profile-header {
+.profileHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.back-btn {
+.btnWrapper {
   display: flex;
   align-items: center;
 }
-.header-btn {
+.backBtn {
   background-color: rgba(192, 192, 192, 0.2);
   border: none;
   border-radius: 50px;

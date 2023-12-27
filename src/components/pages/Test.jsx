@@ -3,12 +3,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import styles from './test.css';
 import ProductCard from '../UI/ProductCard';
 import ProductAddForm from '../UI/ProductAddForm';
+import { showSmallPopup } from '../../reducers/appReducer';
+import SmallPopupWIndow from '../UI/SmallPopupWindow';
+import redHeart from './../../assets/red heart.svg';
 import {
   addPhone,
   changePassword,
   forgotPassword,
   refreshTokens,
-  logout,
+  logoutAction,
   getMyProfile,
   updateUser,
   resetPassword,
@@ -33,6 +36,9 @@ const Test = () => {
   const product = useSelector((state) => state.product.products.results[9]);
   const myProducts = useSelector((state) => state.product.myProducts);
   const likedProducts = useSelector((state) => state.product.liked);
+  const isSmallPopupVisible = useSelector(
+    (state) => state.app.smallPopup.isVisible,
+  );
   const dispatch = useDispatch();
   const helper = () => {
     console.log(
@@ -64,6 +70,30 @@ const Test = () => {
   return (
     <div className={styles.profile}>
       <div className={styles.profileContent}>Test page</div>
+      <button
+        onClick={() => {
+          dispatch(
+            showSmallPopup({
+              img: redHeart,
+              title: 'Test title',
+              button: 'Test button',
+              callback: () => {
+                console.log('test');
+                dispatch(
+                  logoutAction(
+                    user.currentUser.refresh,
+                    user.currentUser.access,
+                  ),
+                );
+              },
+            }),
+          );
+        }}
+      >
+        Test smallPopup
+      </button>
+      {isSmallPopupVisible && <SmallPopupWIndow></SmallPopupWIndow>}
+
       <ProductAddForm></ProductAddForm>
     </div>
   );

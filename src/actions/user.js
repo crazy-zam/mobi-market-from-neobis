@@ -1,7 +1,12 @@
 import axios from 'axios';
 import { API_URL } from '../config';
 import { toast } from 'react-toastify';
-import { setUser, stopUserEdit, setTokens } from '../reducers/userReducer';
+import {
+  setUser,
+  stopUserEdit,
+  setTokens,
+  logout,
+} from '../reducers/userReducer';
 
 const errorNotify = (mess) =>
   toast.error(`${mess}`, {
@@ -167,19 +172,24 @@ export const login = (username, password) => {
   };
 };
 
-export const logout = (refresh, token) => {
-  return async (dispatch) => {
+export const logoutAction = (refresh, token) => {
+  return async () => {
     try {
-      const response = await axios.post(
+      console.log('action');
+      await axios.post(
         `${API_URL}/users/logout/`,
         { refresh_token: refresh },
         {
           headers: { Authorization: `Bearer ${token}` },
         },
       );
-      return response;
+      localStorage.removeItem('access');
+      localStorage.removeItem('refresh');
+      window.location.assign(window.location.hostname);
     } catch (error) {
       console.log(error.response?.data?.error);
+      localStorage.removeItem('access');
+      localStorage.removeItem('refresh');
     }
   };
 };

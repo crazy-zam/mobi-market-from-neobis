@@ -2,11 +2,13 @@ import React from 'react';
 import defaultImg from './../../assets/productImg.png';
 import likeRed from './../../assets/like red.svg';
 import likeGrey from './../../assets/like grey.svg';
+import redHeart from './../../assets/red heart.svg';
 import styles from './productMini.module.css';
 import { useDispatch } from 'react-redux';
 import { productLike, productUnlike, getProduct } from '../../actions/product';
 import { useSelector } from 'react-redux';
 import { showPopupProd, hidePopupProd } from '../../reducers/appReducer';
+import { showSmallPopup } from '../../reducers/appReducer';
 const ProductMini = ({
   id,
   img = defaultImg,
@@ -35,10 +37,19 @@ const ProductMini = ({
           src={liked ? likeRed : likeGrey}
           onClick={() => {
             liked
-              ? dispatch(productUnlike(token, id))
+              ? dispatch(
+                  showSmallPopup({
+                    img: redHeart,
+                    title: 'Вы действительно хотите удалить из понравившихся?',
+                    button: 'Удалить',
+                    type: 'unlike',
+                    id: id,
+                  }),
+                )
               : dispatch(productLike(token, id));
           }}
         />
+
         <div className="productLikes">{likes}</div>
       </div>
     </div>

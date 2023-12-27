@@ -5,12 +5,14 @@ import Header from '../UI/Header';
 import ProductsGrid from '../UI/ProductsGrid';
 import PageButtonGroup from '../UI/PageButtonGroup';
 import './pages.css';
-import ProductMini from '../UI/ProductMini';
+import SmallPopupWIndow from '../UI/SmallPopupWindow';
+
 import ProductCard from '../UI/ProductCard';
 
 const Main = () => {
   const user = useSelector((state) => state.user.currentUser);
   const app = useSelector((state) => state.app);
+
   const dispatch = useDispatch();
   const token = user.access;
   useEffect(() => {
@@ -33,6 +35,7 @@ const Main = () => {
           fullDescription={app.currentProd.full_description}
         />
       )}
+      {app.smallPopup.isVisible && <SmallPopupWIndow></SmallPopupWIndow>}
     </div>
   );
 };

@@ -4,10 +4,21 @@ const OPEN_PROFILE = 'OPEN_PROFILE';
 const SHOW_POPUP_PROD = 'SHOW_POPUP_PROD';
 const HIDE_POPUP_PROD = 'HIDE_POPUP_PROD';
 
+const SHOW_SMALLPOPUP = 'SHOW_SMALLPOPUP';
+const HIDE_SMALLPOPUP = 'HIDE_SMALLPOPUP';
+
 const defaultState = {
   currentPage: 'main',
   isPopupVisible: false,
   currentProd: {},
+  smallPopup: {
+    isVisible: false,
+    img: '',
+    title: '',
+    button: '',
+    id: '',
+    type: '',
+  },
 };
 
 export default function productReducer(state = defaultState, action) {
@@ -31,6 +42,21 @@ export default function productReducer(state = defaultState, action) {
       return { ...state, isPopupVisible: true, currentProd: action.payload };
     case HIDE_POPUP_PROD:
       return { ...state, isPopupVisible: false, currentProd: {} };
+
+    case SHOW_SMALLPOPUP:
+      return {
+        ...state,
+        smallPopup: {
+          isVisible: true,
+          img: action.payload.img,
+          title: action.payload.title,
+          button: action.payload.button,
+          id: action.payload.id,
+          type: action.payload.type,
+        },
+      };
+    case HIDE_SMALLPOPUP:
+      return { ...state, smallPopup: defaultState.smallPopup };
 
     default:
       return state;
@@ -56,4 +82,12 @@ export const showPopupProd = (product) => ({
 });
 export const hidePopupProd = () => ({
   type: HIDE_POPUP_PROD,
+});
+
+export const showSmallPopup = (popup) => ({
+  type: SHOW_SMALLPOPUP,
+  payload: popup,
+});
+export const hideSmallPopup = () => ({
+  type: HIDE_SMALLPOPUP,
 });

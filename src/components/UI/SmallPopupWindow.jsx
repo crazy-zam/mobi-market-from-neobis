@@ -1,31 +1,36 @@
 import React from 'react';
-import redDelete from './../../assets/red delete.svg';
-import redExit from './../../assets/red exit.svg';
-import redHeart from './../../assets/red heart.svg';
+
 import styles from './smallPopupWindow.module.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { hideSmallPopup } from '../../reducers/appReducer';
+import { productUnlike } from '../../actions/product';
+import { logoutAction } from '../../actions/user';
 
-const SmallPopupWIndow = ({ type, content = 'delete', title = false }) => {
-  console.log(type, content, title);
-  const types = {
-    delete: ['Удалить', redDelete],
-    likeDelete: ['Удалить', redHeart],
-    exit: ['Выйти', redExit],
-    registration: ['Зарегистрироваться', redExit],
+const SmallPopupWIndow = () => {
+  const dispatch = useDispatch();
+  const popup = useSelector((state) => state.app.smallPopup);
+  const user = useSelector((state) => state.user);
+  const callbacks = {
+    unlike: () => dispatch(productUnlike(user.currentUser.access, popup.id)),
+    logout: () => {
+      dispatch(logoutAction(user.currentUser.refresh, user.currentUser.access));
+    },
   };
-
   return (
     <div className={styles.wrapper}>
       <div className={styles.background}></div>
       <div className={styles.window}>
-        {title && <div>{title}</div>}
-        <img src={types[content][1]} />
-        <div>Description</div>
-        <div>Description-help</div>
-        <input type="text" />
-        <button className="send-sms-btn"></button>
-        <div>error/help</div>
-        <button>{types[content][0]}</button>
-        <button>Отмена</button>
+        <img src={popup.img} />
+        <div>{popup.title}</div>
+        <button
+          onClick={() => {
+            callbacks[popup.type]();
+            dispatch(hideSmallPopup());
+          }}
+        >
+          {popup.button}
+        </button>
+        <button onClick={() => dispatch(hideSmallPopup())}>Отмена</button>
       </div>
     </div>
   );

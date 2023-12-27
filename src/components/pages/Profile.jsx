@@ -7,11 +7,14 @@ import PageButtonGroup from '../UI/PageButtonGroup';
 import ProductGrid from './../UI/ProductsGrid';
 import ProfileDescription from '../UI/ProfileDescription';
 import ProductCard from '../UI/ProductCard';
+import SmallPopupWIndow from '../UI/SmallPopupWindow';
 import styles from './profile.module.css';
 
 const Profile = () => {
   const app = useSelector((state) => state.app);
-
+  const isSmallPopupVisible = useSelector(
+    (state) => state.app.smallPopup.isVisible,
+  );
   return (
     <div className={styles.profile}>
       <ProfileSidebar></ProfileSidebar>
@@ -38,6 +41,7 @@ const Profile = () => {
         )}
         {/* <FormAcceptPhone></FormAcceptPhone> */}
         <ToastContainer className="toast" />
+        {isSmallPopupVisible && <SmallPopupWIndow></SmallPopupWIndow>}
       </div>
     </div>
   );

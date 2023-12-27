@@ -3,16 +3,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import leftBtn from './../../assets/arrow left header.svg';
 import { userEdit } from '../../reducers/userReducer';
+import styles from './profileHeader.module.css';
 
 const ProfileHeader = ({ title, callback }) => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   return (
-    <div className="profile-header">
-      <div className="back-btn">
+    <div className={styles.profileHeader}>
+      <div className={styles.btnWrapper}>
         <button
-          className="header-btn"
+          className={styles.backBtn}
           onClick={() => {
             navigate('/main');
           }}

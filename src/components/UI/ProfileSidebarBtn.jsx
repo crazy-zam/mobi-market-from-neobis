@@ -7,6 +7,8 @@ import { openLikedAction, openMyProductsAction } from '../../actions/app';
 import { getLikedProducts, getMyProducts } from '../../actions/product';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
+import { showSmallPopup } from '../../reducers/appReducer';
+import { logout } from '../../reducers/userReducer';
 
 const ProfileSidebarBtn = ({ type, text }) => {
   const token = useSelector((state) => state.user.currentUser.access);
@@ -31,11 +33,15 @@ const ProfileSidebarBtn = ({ type, text }) => {
     ],
     exit: [
       imgExit,
-      () => {
-        console.log('exit');
-        dispatch(openLikedAction());
-        dispatch(getLikedProducts(token));
-      },
+      () =>
+        dispatch(
+          showSmallPopup({
+            img: imgExit,
+            title: 'Вы действительно хотите выйтис  аккаунта?',
+            button: 'Выйти',
+            type: 'logout',
+          }),
+        ),
     ],
   };
 

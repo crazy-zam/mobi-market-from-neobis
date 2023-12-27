@@ -12,7 +12,7 @@ const InputImages = ({ images, setImages }) => {
     setImages(imageList);
   };
   return (
-    <div className="App">
+    <div className="ImageUploadForm">
       <ImageUploading
         multiple
         value={images}
