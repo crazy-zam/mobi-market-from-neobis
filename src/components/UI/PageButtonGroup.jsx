@@ -1,5 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
-import Button from './Button';
+import leftArrow from './../../assets/arrow left.svg';
+import rightArrow from './../../assets/arrow right.svg';
+import styles from './pageButtonGroup.module.css';
 import {
   getAllProducts,
   getLikedProducts,
@@ -31,44 +33,64 @@ const PageButtonGroup = ({ type }) => {
   };
 
   const products = types[type].product;
-  const changePageHandler = types[type].callback;
-
   const currPage = products.page;
   const pages = new Array();
   if (!!products.previous)
     pages.push(
-      { type: 'pageBtn pageBtnArrow', title: 'previous' },
-      { type: 'pageBtn', title: currPage - 1 },
+      <button
+        className={styles.arrow}
+        onClick={() => {
+          types[type].callback(currPage - 1);
+        }}
+      >
+        <img src={leftArrow} />
+      </button>,
+      <button
+        className={styles.page}
+        onClick={() => {
+          types[type].callback(currPage - 1);
+        }}
+      >
+        {currPage - 1}
+      </button>,
     );
-  pages.push({ type: 'pageBtnCurrent pageBtn', title: currPage });
-  if (!!products.next)
+  pages.push(<button className={styles.currentPage}>{currPage}</button>);
+  if (!!products.next) {
     pages.push(
-      { type: 'pageBtn', title: currPage + 1 },
-      {
-        type: 'pageBtn pageBtnArrow',
-        title: 'next',
-      },
+      <button
+        className={styles.page}
+        onClick={() => {
+          types[type].callback(currPage + 1);
+        }}
+      >
+        {currPage + 1}
+      </button>,
     );
+    if (products.count > (products.page + 1) * 32) {
+      pages.push(
+        <button
+          className={styles.page}
+          onClick={() => {
+            types[type].callback(currPage + 2);
+          }}
+        >
+          {currPage + 2}
+        </button>,
+      );
+    }
+    pages.push(
+      <button
+        className={styles.arrow}
+        onClick={() => {
+          types[type].callback(currPage + 1);
+        }}
+      >
+        <img src={rightArrow} />
+      </button>,
+    );
+  }
 
-  return (
-    <div>
-      {pages.map(({ type, title }, ind) => (
-        <Button
-          key={`${title},${ind}`}
-          type={type}
-          fill={title}
-          callback={
-            typeof title == 'number' && title != currPage
-              ? () => changePageHandler(title)
-              : () =>
-                  changePageHandler(
-                    title === 'previous' ? currPage - 1 : currPage + 1,
-                  )
-          }
-        />
-      ))}
-    </div>
-  );
+  return <div className={styles.wrapper}>{pages.map((btn) => btn)}</div>;
 };
 
 export default PageButtonGroup;

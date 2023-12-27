@@ -11,24 +11,28 @@ const Header = () => {
   const user = useSelector((state) => state.user.currentUser);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  console.log(user);
   return (
     <div className={styles.header}>
       <img src={logo} />
-      <Button fill="Подать объявление"></Button>
-      <div
-        className="user"
-        onClick={() => {
-          dispatch(openProfileAction());
-          navigate('/profile');
-        }}
-      >
-        <img
-          className={styles.profileLogo}
-          src={user.photo ? user.photo : profileLogodefault}
-        />
-        <div>
-          <div>{user.username}</div>
-          <div>{user.first_name}</div>
+      <div className={styles.wrapper}>
+        <button className={styles.btn}>Подать объявление</button>
+
+        <div
+          className={styles.userInfo}
+          onClick={() => {
+            dispatch(openProfileAction());
+            navigate('/profile');
+          }}
+        >
+          <div className={styles.userDescription}>
+            <div>{user.username}</div>
+            <div>{user.first_name}</div>
+          </div>
+          <img
+            className={styles.profileLogo}
+            src={user.photo ? user.photo : profileLogodefault}
+          />
         </div>
       </div>
     </div>

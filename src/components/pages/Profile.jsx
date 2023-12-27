@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 import ProfileSidebar from '../UI/ProfileSidebar';
+import ProfileHeader from './../UI/ProfileHeader';
 import FormAcceptPhone from '../UI/FormAcceptPhone';
 import PageButtonGroup from '../UI/PageButtonGroup';
 import ProductGrid from './../UI/ProductsGrid';
@@ -18,6 +19,7 @@ const Profile = () => {
   return (
     <div className={styles.profile}>
       <ProfileSidebar></ProfileSidebar>
+      <ProfileHeader title="Профиль"></ProfileHeader>
       <div className="profile-content">
         {app.currentPage == 'profile' ? (
           <ProfileDescription></ProfileDescription>

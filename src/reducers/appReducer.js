@@ -6,6 +6,8 @@ const HIDE_POPUP_PROD = 'HIDE_POPUP_PROD';
 
 const SHOW_SMALLPOPUP = 'SHOW_SMALLPOPUP';
 const HIDE_SMALLPOPUP = 'HIDE_SMALLPOPUP';
+const LIKE_CURRENT_PROD = 'LIKE_CURRENT_PROD';
+const UNLIKE_CURRENT_PROD = 'UNLIKE_CURRENT_PROD';
 
 const defaultState = {
   currentPage: 'main',
@@ -58,6 +60,25 @@ export default function productReducer(state = defaultState, action) {
     case HIDE_SMALLPOPUP:
       return { ...state, smallPopup: defaultState.smallPopup };
 
+    case LIKE_CURRENT_PROD:
+      return {
+        ...state,
+        currentProd: {
+          ...state.currentProd,
+          liked_by_current_user: true,
+          like_count: state.currentProd.like_count + 1,
+        },
+      };
+    case UNLIKE_CURRENT_PROD:
+      return {
+        ...state,
+        currentProd: {
+          ...state.currentProd,
+          liked_by_current_user: false,
+          like_count: state.currentProd.like_count - 1,
+        },
+      };
+
     default:
       return state;
   }
@@ -90,4 +111,11 @@ export const showSmallPopup = (popup) => ({
 });
 export const hideSmallPopup = () => ({
   type: HIDE_SMALLPOPUP,
+});
+
+export const likeCurrentProd = () => ({
+  type: LIKE_CURRENT_PROD,
+});
+export const unlikeCurrentProd = () => ({
+  type: UNLIKE_CURRENT_PROD,
 });

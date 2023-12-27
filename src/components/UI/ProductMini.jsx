@@ -22,10 +22,12 @@ const ProductMini = ({
   return (
     <div
       className={styles.product}
-      onClick={() => {
-        dispatch(getProduct(id, token)).then((result) =>
-          dispatch(showPopupProd(result.data)),
-        );
+      onClick={(event) => {
+        if (!event.target.classList.contains('heart')) {
+          dispatch(getProduct(id, token)).then((result) =>
+            dispatch(showPopupProd(result.data)),
+          );
+        }
       }}
     >
       <img className={styles.productImg} src={img} />
@@ -33,7 +35,7 @@ const ProductMini = ({
       <div className={styles.productTitle}>{price}</div>
       <div className={styles.likes}>
         <img
-          className="like"
+          className="heart"
           src={liked ? likeRed : likeGrey}
           onClick={() => {
             liked

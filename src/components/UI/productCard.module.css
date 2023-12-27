@@ -20,8 +20,8 @@
   font-family: 'Inter', sans-serif;
   align-items: flex-start;
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 50vh;
+  transform: translate(0, -50%);
 }
 .image {
   width: 500px;
@@ -66,7 +66,9 @@
   font-size: 16px;
   font-weight: 400;
   color: rgba(192, 192, 192, 1);
-  margin-top: 16px;
+  margin-top: 12px;
+  overflow: auto;
+  max-height: 3em;
 }
 .fullDescriptionLabel {
   font-size: 16px;
@@ -78,10 +80,18 @@
   font-size: 16px;
   font-weight: 400;
   color: rgba(192, 192, 192, 1);
-  margin-top: 16px;
+  margin-top: 12px;
+  overflow: auto;
+  max-height: 7em;
 }
 .carousel {
   left: 0;
   display: flex;
+  justify-content: center;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
   justify-content: center;
 }

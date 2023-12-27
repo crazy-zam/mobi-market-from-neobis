@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './button.module.css';
+import './button.module.css';
 import leftArrow from './../../assets/arrow left.svg';
 import rightArrow from './../../assets/arrow right.svg';
 

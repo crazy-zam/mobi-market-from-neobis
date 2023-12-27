@@ -1,6 +1,7 @@
 const SET_PRODUCTS = 'SET_PRODUCTS';
 const LIKE_PRODUCT = 'LIKE_PRODUCT';
 const SET_LIKED = 'SET_LIKED';
+
 const UNLIKE_PRODUCT = 'UNLIKE_PRODUCT';
 const SET_MY_PRODUCTS = 'SET_MY_PRODUCTS';
 
@@ -22,11 +23,17 @@ export default function productReducer(state = defaultState, action) {
         ...state,
         products: {
           ...state.products,
-          ...state.products.results.map((product) =>
-            product.id === action.payload
-              ? { ...product, liked_by_current_user: true }
-              : { ...product },
-          ),
+          results: [
+            ...state.products.results.map((product, ind) =>
+              product.id === action.payload
+                ? {
+                    ...product,
+                    liked_by_current_user: true,
+                    like_count: state.products.results[ind].like_count + 1,
+                  }
+                : { ...product },
+            ),
+          ],
         },
       };
     case UNLIKE_PRODUCT:
@@ -34,11 +41,17 @@ export default function productReducer(state = defaultState, action) {
         ...state,
         products: {
           ...state.products,
-          ...state.products.results.map((product) =>
-            product.id === action.payload
-              ? { ...product, liked_by_current_user: false }
-              : { ...product },
-          ),
+          results: [
+            ...state.products.results.map((product, ind) =>
+              product.id === action.payload
+                ? {
+                    ...product,
+                    liked_by_current_user: false,
+                    like_count: state.products.results[ind].like_count - 1,
+                  }
+                : { ...product },
+            ),
+          ],
         },
       };
     case SET_LIKED:
