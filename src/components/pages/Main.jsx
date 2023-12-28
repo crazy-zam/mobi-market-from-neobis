@@ -6,6 +6,7 @@ import ProductsGrid from '../UI/ProductsGrid';
 import PageButtonGroup from '../UI/PageButtonGroup';
 import './pages.css';
 import SmallPopupWIndow from '../UI/SmallPopupWindow';
+import ProductAddForm from './../UI/ProductAddForm';
 
 import ProductCard from '../UI/ProductCard';
 
@@ -35,6 +36,8 @@ const Main = () => {
           fullDescription={app.currentProd.full_description}
         />
       )}
+      {app.isAddProdPopupVisible && <ProductAddForm></ProductAddForm>}
+
       {app.smallPopup.isVisible && <SmallPopupWIndow></SmallPopupWIndow>}
     </div>
   );

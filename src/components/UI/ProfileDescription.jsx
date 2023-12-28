@@ -8,7 +8,7 @@ const ProfileDescription = () => {
   const dispatch = useDispatch();
   return (
     <div>
-      <ProfileHeader title="Профиль"></ProfileHeader>
+      {/* <ProfileHeader title="Профиль"></ProfileHeader> */}
       <ProfileForm></ProfileForm>
     </div>
   );

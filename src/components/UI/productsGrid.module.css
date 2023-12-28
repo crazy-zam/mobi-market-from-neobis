@@ -1,6 +1,8 @@
 .wrapper {
   width: 1356px;
   height: 80vh;
+  margin: 16px;
+  position: absolute;
   display: grid;
   grid-template-columns: repeat(8, minmax(154px, 1fr));
   grid-template-rows: repeat(4, minmax(184px, 1fr));

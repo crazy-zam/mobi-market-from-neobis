@@ -3,7 +3,8 @@ const OPEN_MY_PRODUCTS = 'OPEN_MY_PRODUCTS';
 const OPEN_PROFILE = 'OPEN_PROFILE';
 const SHOW_POPUP_PROD = 'SHOW_POPUP_PROD';
 const HIDE_POPUP_PROD = 'HIDE_POPUP_PROD';
-
+const SHOW_ADD_POPUP = 'SHOW_ADDPOPUP';
+const HIDE_ADD_POPUP = 'HIDE_ADD_POPUP';
 const SHOW_SMALLPOPUP = 'SHOW_SMALLPOPUP';
 const HIDE_SMALLPOPUP = 'HIDE_SMALLPOPUP';
 const LIKE_CURRENT_PROD = 'LIKE_CURRENT_PROD';
@@ -13,6 +14,7 @@ const defaultState = {
   currentPage: 'main',
   isPopupVisible: false,
   currentProd: {},
+  isAddProdPopupVisible: false,
   smallPopup: {
     isVisible: false,
     img: '',
@@ -78,6 +80,10 @@ export default function productReducer(state = defaultState, action) {
           like_count: state.currentProd.like_count - 1,
         },
       };
+    case SHOW_ADD_POPUP:
+      return { ...state, isAddProdPopupVisible: true };
+    case HIDE_ADD_POPUP:
+      return { ...state, isAddProdPopupVisible: false };
 
     default:
       return state;
@@ -118,4 +124,11 @@ export const likeCurrentProd = () => ({
 });
 export const unlikeCurrentProd = () => ({
   type: UNLIKE_CURRENT_PROD,
+});
+
+export const showAddProdPopup = () => ({
+  type: SHOW_ADD_POPUP,
+});
+export const hideAddProdPopup = () => ({
+  type: HIDE_ADD_POPUP,
 });

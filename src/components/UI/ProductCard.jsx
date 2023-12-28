@@ -12,7 +12,7 @@ import likeGrey from './../../assets/like grey.svg';
 import redHeart from './../../assets/red heart.svg';
 import { showSmallPopup } from '../../reducers/appReducer';
 import { likeCurrentProd, unlikeCurrentProd } from '../../reducers/appReducer';
-
+import { showAddProdPopup } from '../../reducers/appReducer';
 const ProductCard = ({
   id,
   img,
@@ -25,6 +25,7 @@ const ProductCard = ({
 }) => {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.user.currentUser.access);
+  const app = useSelector((state) => state.app);
   return (
     <div className={styles.wrapper}>
       <div
@@ -86,6 +87,21 @@ const ProductCard = ({
         <div className={styles.shortDescription}>{shortDescription}</div>
         <div className={styles.fullDescriptionLabel}>Детальное описание</div>
         <div className={styles.fullDescription}>{fullDescription}</div>
+        {app.currentPage === 'myProducts' && (
+          <div className={styles.buttons}>
+            <button
+              className={styles.updateBtn}
+              onClick={() => {
+                dispatch(showAddProdPopup());
+              }}
+            >
+              Редактировать
+            </button>{' '}
+            <button className={styles.deleteBtn} onClick={() => {}}>
+              Удалить
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

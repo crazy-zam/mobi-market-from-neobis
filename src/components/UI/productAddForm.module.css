@@ -23,7 +23,15 @@
   top: 50%;
   left: 50%;
 }
-
+.closeBtn {
+  width: 24px;
+  height: 24px;
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+  background-image: url('./../../assets/closeX.svg');
+  margin-left: auto;
+  margin-right: 0em;
+}
 .imageUploader {
   width: 564px;
 }

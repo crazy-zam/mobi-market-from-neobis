@@ -23,26 +23,19 @@ export function getAllProducts(token, page = 1) {
   };
 }
 
-export function addProduct(
-  title,
-  price,
-  shortDescription,
-  fullDescription,
-  uploadedImages,
-  token,
-) {
+export function addProduct(formData, token) {
   return async () => {
     try {
-      const formData = new FormData();
+      // const formData = new FormData();
 
-      formData.append('name', title);
-      formData.append('price', price);
-      formData.append('short_description', shortDescription);
-      formData.append('full_description', fullDescription);
-      uploadedImages.forEach((file) => {
-        console.log(file);
-        formData.append('uploaded_images', file, file.name);
-      });
+      // formData.append('name', title);
+      // formData.append('price', price);
+      // formData.append('short_description', shortDescription);
+      // formData.append('full_description', fullDescription);
+      // uploadedImages.forEach((file) => {
+      //   console.log(file);
+      //   formData.append('uploaded_images', file, file.name);
+      // });
       const product = await axios.post(`${API_URL}/products/`, formData, {
         headers: {
           Authorization: `Bearer ${token}`,

@@ -4,6 +4,7 @@ import { ToastContainer } from 'react-toastify';
 import ProfileSidebar from '../UI/ProfileSidebar';
 import ProfileHeader from './../UI/ProfileHeader';
 import FormAcceptPhone from '../UI/FormAcceptPhone';
+import ProductAddForm from './../UI/ProductAddForm';
 import PageButtonGroup from '../UI/PageButtonGroup';
 import ProductGrid from './../UI/ProductsGrid';
 import ProfileDescription from '../UI/ProfileDescription';
@@ -19,12 +20,13 @@ const Profile = () => {
   return (
     <div className={styles.profile}>
       <ProfileSidebar></ProfileSidebar>
-      <ProfileHeader title="Профиль"></ProfileHeader>
+
       <div className="profile-content">
+        <ProfileHeader title="Профиль"></ProfileHeader>
         {app.currentPage == 'profile' ? (
           <ProfileDescription></ProfileDescription>
         ) : (
-          <div>
+          <div className={styles.content}>
             <ProductGrid type={app.currentPage}></ProductGrid>
             <PageButtonGroup type={app.currentPage}></PageButtonGroup>
           </div>
@@ -40,6 +42,9 @@ const Profile = () => {
             shortDescription={app.currentProd.short_description}
             fullDescription={app.currentProd.full_description}
           />
+        )}
+        {app.isAddProdPopupVisible && (
+          <ProductAddForm prod={app.currentProd}></ProductAddForm>
         )}
         {/* <FormAcceptPhone></FormAcceptPhone> */}
         <ToastContainer className="toast" />

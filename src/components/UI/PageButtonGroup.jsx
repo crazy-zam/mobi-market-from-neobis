@@ -90,7 +90,13 @@ const PageButtonGroup = ({ type }) => {
     );
   }
 
-  return <div className={styles.wrapper}>{pages.map((btn) => btn)}</div>;
+  return (
+    <div className={styles.wrapper}>
+      {pages.map((btn, ind) => (
+        <div key={ind}>{btn}</div>
+      ))}
+    </div>
+  );
 };
 
 export default PageButtonGroup;

@@ -6,17 +6,23 @@ import logo from '../../assets/logo.svg';
 import profileLogodefault from './../../assets/profile default.svg';
 import styles from './header.module.css';
 import { openProfileAction } from '../../actions/app';
+import { showAddProdPopup } from '../../reducers/appReducer';
 
 const Header = () => {
   const user = useSelector((state) => state.user.currentUser);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  console.log(user);
+
   return (
     <div className={styles.header}>
       <img src={logo} />
       <div className={styles.wrapper}>
-        <button className={styles.btn}>Подать объявление</button>
+        <button
+          className={styles.btn}
+          onClick={() => dispatch(showAddProdPopup())}
+        >
+          Подать объявление
+        </button>
 
         <div
           className={styles.userInfo}

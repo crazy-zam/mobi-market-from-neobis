@@ -95,3 +95,36 @@
   align-items: center;
   justify-content: center;
 }
+
+.updateBtn {
+  background-color: rgba(93, 95, 239, 1);
+  color: white;
+  width: 260px;
+  height: 44px;
+  border: none;
+  border-radius: 16px;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.updateBtn:hover {
+  background-color: rgb(55, 57, 194);
+}
+
+.deleteBtn {
+  background-color: rgba(93, 95, 239, 0);
+  color: rgba(243, 69, 69, 1);
+  width: 260px;
+  height: 44px;
+  border: none;
+  border-radius: 16px;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.deleteBtn:hover {
+  background-color: rgba(243, 69, 69, 1);
+  color: white;
+}
