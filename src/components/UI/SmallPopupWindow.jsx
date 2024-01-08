@@ -1,5 +1,3 @@
-import React from 'react';
-
 import styles from './smallPopupWindow.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { hideSmallPopup } from '../../reducers/appReducer';
@@ -7,7 +5,7 @@ import { productUnlike } from '../../actions/product';
 import { logoutAction } from '../../actions/user';
 import { unlikeCurrentProd } from '../../reducers/appReducer';
 
-const SmallPopupWIndow = () => {
+const SmallPopupWindow = () => {
   const dispatch = useDispatch();
   const popup = useSelector((state) => state.app.smallPopup);
   const user = useSelector((state) => state.user);
@@ -48,4 +46,4 @@ const SmallPopupWIndow = () => {
   );
 };
 
-export default SmallPopupWIndow;
+export default SmallPopupWindow;

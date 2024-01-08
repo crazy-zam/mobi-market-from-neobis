@@ -17,12 +17,17 @@ const Profile = () => {
   const isSmallPopupVisible = useSelector(
     (state) => state.app.smallPopup.isVisible,
   );
+  const pages = {
+    profile: 'Профиль',
+    liked: 'Понравившиеся',
+    myProducts: 'Мои товары',
+  };
   return (
     <div className={styles.profile}>
       <ProfileSidebar></ProfileSidebar>
 
       <div className="profile-content">
-        <ProfileHeader title="Профиль"></ProfileHeader>
+        <ProfileHeader title={pages[app.currentPage]}></ProfileHeader>
         {app.currentPage == 'profile' ? (
           <ProfileDescription></ProfileDescription>
         ) : (

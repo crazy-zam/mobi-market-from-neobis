@@ -3,37 +3,43 @@ import styles from './productAddForm.module.css';
 import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { hidePopupProd, hideAddProdPopup } from '../../reducers/appReducer';
-import { addProduct } from '../../actions/product';
+import { addProduct, updateProduct } from '../../actions/product';
 import TextareaAutosize from 'react-textarea-autosize';
 import InputImages from './InputImages';
 
 const ProductAddForm = ({ prod }) => {
-  console.log(prod);
   const [images, setImages] = useState([]);
   const [imagesToDelete, setImagesToDelete] = useState([]);
 
   const dispatch = useDispatch();
   const token = useSelector((state) => state.user.currentUser.access);
-  if (!!prod) {
-  }
+
   const formik = useFormik({
-    initialValues: {
-      price: prod.price || '',
-      name: prod.name || '',
-      short_description: prod.short_description || '',
-      full_description: prod.full_description || '',
-      images: [],
-    },
+    initialValues:
+      prod !== undefined
+        ? {
+            price: prod.price,
+            name: prod.name,
+            short_description: prod.short_description,
+            full_description: prod.full_description,
+            // images: [],
+          }
+        : { price: '', name: '', short_description: '', full_description: '' },
     onSubmit: (values) => {
-      console.log(values);
-      console.log();
       const formData = new FormData();
       Object.entries(values).forEach(([key, val]) => formData.append(key, val));
       images.forEach((file) => {
-        console.log(file);
         formData.append('uploaded_images', file.file, file.file.name);
       });
-      // dispatch(addProduct(formData, token));
+      if (imagesToDelete.legth === 0) {
+        dispatch(addProduct(formData, token));
+      } else {
+        imagesToDelete.forEach((file) => {
+          formData.append('deleted_images', file.id);
+        });
+        console.log(prod);
+        dispatch(updateProduct(prod.id, formData, token));
+      }
     },
   });
 
@@ -48,7 +54,7 @@ const ProductAddForm = ({ prod }) => {
         <InputImages
           images={images}
           setImages={setImages}
-          existedImages={[...prod.images]}
+          existedImages={prod?.images !== undefined ? [...prod.images] : []}
           imagesToDelete={imagesToDelete}
           setImagesToDelete={setImagesToDelete}
         ></InputImages>

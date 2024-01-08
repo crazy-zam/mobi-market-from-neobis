@@ -1,18 +1,23 @@
 import { ToastContainer } from 'react-toastify';
-
+import { Link } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
 import InputForm from '../../UI/InputForm';
-
+import PhonePopupWindow from '../../UI/PhonePopupWindow';
 import authBackground from '../../../assets/auth background.png';
-import './auth.css';
+import styles from './auth.module.css';
+import { useSelector } from 'react-redux';
 
 function Login() {
+  const phonePopup = useSelector((state) => state.app.phonePopup.isVisible);
   return (
-    <div className="auth">
-      <img src={authBackground} />
-      <div className="auth-side">
+    <div className={styles.auth}>
+      <img className={styles.sidebar} src={authBackground} />
+      <div className={styles.authSide}>
         <InputForm type="login" />
-        <a href="">Регистрация</a>
+        <Link to="/registration" className={styles.registrationBtn}>
+          Зарегистрироваться
+        </Link>
+        {phonePopup && <PhonePopupWindow></PhonePopupWindow>}
         <ToastContainer className="toast" />
       </div>
     </div>

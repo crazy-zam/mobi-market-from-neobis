@@ -10,11 +10,13 @@ const InputImages = ({
   imagesToDelete,
   setImagesToDelete,
 }) => {
+  const [currentImages, setCurrentImages] = useState(existedImages);
+
   const maxNumber = 10;
-  console.log(existedImages, imagesToDelete);
+
   const onChange = (imageList, addUpdateIndex) => {
     // data for submit
-    console.log(imageList, addUpdateIndex);
+    // console.log(imageList, addUpdateIndex);
     setImages(imageList);
   };
   return (
@@ -34,7 +36,6 @@ const InputImages = ({
           isDragging,
           dragProps,
         }) => (
-          // write your building UI
           <div className={styles.uploadImageWrapper}>
             <button
               type="button"
@@ -46,22 +47,57 @@ const InputImages = ({
               <img src={addImgBtn} />
               <div className={styles.addBtnDescription}>Добавить фото</div>
             </button>
-            {existedImages.map((image, index) => (
+            {currentImages.map((image, index) => {
+              return (
+                <div key={index} className={styles.imageWrapper}>
+                  <img className={styles.imageItem} src={image.image} />
+                  <div
+                    className={styles.mask}
+                    onClick={() => {
+                      onImageUpload();
+                      setImagesToDelete([...imagesToDelete, image]);
+
+                      currentImages.splice(
+                        currentImages.findIndex((item) => item.id === image.id),
+                        1,
+                      );
+                    }}
+                  >
+                    Заменить фото
+                  </div>
+                  <button
+                    className={styles.imageDelete}
+                    onClick={() => {
+                      setImagesToDelete([...imagesToDelete, image]);
+
+                      currentImages.splice(
+                        currentImages.findIndex((item) => item.id === image.id),
+                        1,
+                      );
+                    }}
+                    onMouseOver={() => {}}
+                  >
+                    <img src={trash} />
+                  </button>
+                </div>
+              );
+            })}
+            {/* {currentImages.map((image, index) => (
               <div key={index} className={styles.imageWrapper}>
                 <img className={styles.imageItem} src={image.image} />
                 <div
                   className={styles.mask}
                   onClick={() => {
                     setImagesToDelete([...imagesToDelete, image]);
-                    console.log('before', existedImages);
-                    existedImages.splice(
-                      existedImages.findIndex((item) => {
-                        console.log(item.id, image.id);
-                        return item.id === image.id;
-                      }),
-                      1,
+                    setCurrentImages(
+                      currentImages.splice(
+                        existedImages.findIndex((item) => {
+                          console.log(item.id, image.id);
+                          return item.id === image.id;
+                        }),
+                        1,
+                      ),
                     );
-                    console.log('after', existedImages);
                     onImageUpload();
                   }}
                 >
@@ -75,7 +111,7 @@ const InputImages = ({
                   <img src={trash} />
                 </button>
               </div>
-            ))}
+            ))} */}
             {imageList.map((image, index) => (
               <div key={index} className={styles.imageWrapper}>
                 <img className={styles.imageItem} src={image['data_url']} />

@@ -9,6 +9,8 @@ const SHOW_SMALLPOPUP = 'SHOW_SMALLPOPUP';
 const HIDE_SMALLPOPUP = 'HIDE_SMALLPOPUP';
 const LIKE_CURRENT_PROD = 'LIKE_CURRENT_PROD';
 const UNLIKE_CURRENT_PROD = 'UNLIKE_CURRENT_PROD';
+const SHOW_PHONEPOPUP = 'SHOW_PHONEPOPUP';
+const HIDE_PHONEPOPUP = 'HIDE_PHONEPOPUP';
 
 const defaultState = {
   currentPage: 'main',
@@ -21,6 +23,14 @@ const defaultState = {
     title: '',
     button: '',
     id: '',
+    type: '',
+  },
+  phonePopup: {
+    isVisible: false,
+    img: '',
+    title: '',
+    firstBtn: '',
+    secondBtn: '',
     type: '',
   },
 };
@@ -85,6 +95,21 @@ export default function productReducer(state = defaultState, action) {
     case HIDE_ADD_POPUP:
       return { ...state, isAddProdPopupVisible: false };
 
+    case SHOW_PHONEPOPUP:
+      return {
+        ...state,
+        phonePopup: {
+          isVisible: true,
+          img: action.payload.img,
+          title: action.payload.title,
+          firstBtn: action.payload.firstBtn,
+          secondBtn: action.payload.secondBtn,
+          type: action.payload.type,
+        },
+      };
+    case HIDE_PHONEPOPUP:
+      return { ...state, phonePopup: defaultState.phonePopup };
+
     default:
       return state;
   }
@@ -131,4 +156,12 @@ export const showAddProdPopup = () => ({
 });
 export const hideAddProdPopup = () => ({
   type: HIDE_ADD_POPUP,
+});
+
+export const showPhonePopup = (popup) => ({
+  type: SHOW_PHONEPOPUP,
+  payload: popup,
+});
+export const hidePhonelPopup = () => ({
+  type: HIDE_PHONEPOPUP,
 });

@@ -76,7 +76,8 @@ export const checkUser = (username, email, setConfigurePass) => {
         username: username,
         email: email,
       });
-      const { usernameResponse, emailResponse } = response.data;
+      const { username: usernameResponse, email: emailResponse } =
+        response.data;
       if (usernameResponse || emailResponse) {
         const message = `${
           usernameResponse && emailResponse
@@ -88,7 +89,11 @@ export const checkUser = (username, email, setConfigurePass) => {
         setConfigurePass(true);
       }
     } catch (error) {
-      console.log(error);
+      let message = '';
+      Object.values(error.response.data.error).forEach((err) =>
+        err.forEach((msg) => (message = message + msg)),
+      );
+      errorNotify(message);
     }
   };
 };
@@ -255,6 +260,7 @@ export const registration = (username, email, password, confirm_password) => {
         password: password,
         confirm_password: confirm_password,
       });
+      successNotify('Успешная регистрация, выполните вход');
       return response;
     } catch (error) {
       console.log(error);

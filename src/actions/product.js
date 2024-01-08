@@ -129,34 +129,25 @@ export function getProduct(id, token) {
   };
 }
 
-export function updateProduct(
-  id,
-  title,
-  price,
-  shortDescription,
-  fullDescription,
-  uploadedImages,
-  deletedImages,
-  token,
-) {
+export function updateProduct(id, formData, token) {
   return async () => {
     try {
-      const formData = new FormData();
-      formData.append('name', title);
-      formData.append('price', price);
-      formData.append('short_description', shortDescription);
-      formData.append('full_description', fullDescription);
-      uploadedImages.forEach((file) => {
-        formData.append('uploaded_images', file, file.name);
-      });
-      deletedImages.forEach((id) => {
-        formData.append('deleted_images', id);
-      });
+      // const formData = new FormData();
+      // formData.append('name', title);
+      // formData.append('price', price);
+      // formData.append('short_description', shortDescription);
+      // formData.append('full_description', fullDescription);
+      // uploadedImages.forEach((file) => {
+      //   formData.append('uploaded_images', file, file.name);
+      // });
+      // deletedImages.forEach((id) => {
+      //   formData.append('deleted_images', id);
+      // });
       const product = await axios.put(`${API_URL}/products/${id}/`, formData, {
         headers: { Authorization: `Bearer ${token}` },
       });
       console.log(product);
-      return product;
+      // return product;
     } catch (error) {
       console.log(error);
     }

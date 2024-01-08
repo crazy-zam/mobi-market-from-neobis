@@ -1,16 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap');
 .profileHeader {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
   align-items: center;
-  justify-content: space-between;
-  position: relative;
-  top: 32px;
+
+  margin: 32px 0;
+  font-family: 'Inter', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: rgba(73, 73, 73, 1);
+  width: 560px;
 }
 .btnWrapper {
   display: flex;
   align-items: center;
+  font-size: 16px;
+  font-weight: 500;
+  color: black;
 }
 .backBtn {
   background-color: rgba(192, 192, 192, 0.2);
   border: none;
   border-radius: 50px;
+}
+.headerBtn {
+  width: 74px;
+  height: 28px;
+  border: none;
+  border-radius: 50px;
+  background-color: rgba(192, 192, 192, 0.2);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: black;
+  justify-self: end;
 }
